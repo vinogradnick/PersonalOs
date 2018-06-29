@@ -7,14 +7,18 @@ using System.Threading.Tasks;
 
 namespace MPFS_FS
 {
-    class MPFS_FS
+    public class MPFS_FS
     {
         DirectoryInfo RootDirectory;
         /// <summary>
-        /// Размер диска по умолчания в 30 мб
+        /// Размер диска по умолчанию в 30 мб
         /// </summary>
         private static long disk_size = 30 * 1024 * 1024;
-        public long disk_load;
+        /// <summary>
+        /// Получение размера заполненого пространства
+        /// </summary>
+        public long disk_load=>new DirectoryInfo(RootDirectory.FullName).GetFiles("*.*", SearchOption.AllDirectories).Sum(file => file.Length);
+
         public MPFS_FS(bool status)
         {
             ///Если система существует
@@ -48,5 +52,6 @@ namespace MPFS_FS
             Directory.CreateDirectory($@"{RootDirectory.Name}\System");//Системная папка
             Directory.CreateDirectory($@"{RootDirectory.Name}\Journal");//Системный журнал
         }
+        
     }
 }

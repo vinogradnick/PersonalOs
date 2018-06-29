@@ -28,6 +28,14 @@ namespace Kernel
         /// Загрузка ядра
         /// </summary>
         private static int WorkLoad { get; set; }
+
+        #region OtherSystemFiles
+
+        MPFS_FS.MPFS_FS FILE_SYSTEM;//Файловая система;
+
+        #endregion;
+
+
         /// <summary>
         /// Конструктор ядра 
         /// </summary>
@@ -42,7 +50,11 @@ namespace Kernel
         {
             /* Создание списка модулей 1/4 размера оперативной памяти */
             ListOfModules = new Stack<Module>((int)ram_size/4);//Создание списка модулей
+
+            FILE_SYSTEM = new MPFS_FS.MPFS_FS(status_load);
+
         }
+       
         /// <summary>
         /// Переопределение метода toString
         /// </summary>

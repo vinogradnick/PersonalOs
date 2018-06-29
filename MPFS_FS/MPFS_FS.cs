@@ -9,22 +9,29 @@ namespace MPFS_FS
 {
     public class MPFS_FS
     {
+        /// <summary>
+        /// Корневая директория системы
+        /// </summary>
         DirectoryInfo RootDirectory;
         /// <summary>
         /// Размер диска по умолчанию в 30 мб
         /// </summary>
-        private static long disk_size = 30 * 1024 * 1024;
+        public readonly long disk_size = 30 * 1024 * 1024;
         /// <summary>
         /// Получение размера заполненого пространства
         /// </summary>
-        public long disk_load=>new DirectoryInfo(RootDirectory.FullName).GetFiles("*.*", SearchOption.AllDirectories).Sum(file => file.Length);
-
+        public long disk_load;
+        /// <summary>
+        /// Конструктор системы по умолчанию
+        /// </summary>
+        /// <param name="status"></param>
         public MPFS_FS(bool status)
         {
+            RootDirectory = new DirectoryInfo("OS");//Корневой каталог
             ///Если система существует
             if (Check_FileSystem() == true)
             {
-               
+
             }
             else
             {
@@ -37,21 +44,69 @@ namespace MPFS_FS
         public bool Check_FileSystem()
         {
             /* Папка с системой не была создана */
-            if (Directory.GetDirectories("OS") == null)
+            try
+            {
+                Directory.GetDirectories("OS");
                 return false;
 
-            return true;//Система не была создана
+            }
+            catch (Exception)
+            {
+                return true;//Система не была создана
+            }
+
+
         }
         /// <summary>
         /// Создание директории файловой системы
         /// </summary>
         private void Create_OS_Directory()
         {
-            RootDirectory = new DirectoryInfo("OS");//Корневой каталог
             Directory.CreateDirectory($@"{RootDirectory.Name}\Modules");//Модули системы
             Directory.CreateDirectory($@"{RootDirectory.Name}\System");//Системная папка
             Directory.CreateDirectory($@"{RootDirectory.Name}\Journal");//Системный журнал
         }
-        
+        public override string ToString()
+        {
+            return $"Размер диска {disk_size} {disk_load}";
+        }
+        public List<string> ReadInfo(string path)
+        {
+            List<string> streamResult = new List<string>();
+            try
+            {
+
+                StreamReader stream = new StreamReader(path);
+                while (!stream.EndOfStream)
+                {
+                    streamResult.Add(stream.ReadLine());
+                }
+                stream.Close();
+            }
+            catch (Exception)
+            {
+
+            }
+            return streamResult;
+        }
+        public void WriteInfo(string path,List<string> info)
+        {
+            try
+            {
+                StreamWriter writer = new StreamWriter(path);
+                foreach (string item in info)
+                {
+                    writer.WriteLine(item);
+
+                }
+                writer.Close();
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
     }
 }

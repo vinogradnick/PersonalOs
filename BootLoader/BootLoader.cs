@@ -14,16 +14,20 @@ namespace BootLoader
         /// <summary>
         /// Версия загрузчика
         /// </summary>
-        private static readonly string Version;
+        private static readonly string Version = "0.01";
         /// <summary>
         /// Имя загрузчика
         /// </summary>
-        private static readonly string Name;
-        
+        private static readonly string Name = "UEFI";
        public BootLoader()
         {
             Console.Beep();
-          
+            Status = true;
+        }
+        public bool Status { get; private set; }
+        public override string ToString()
+        {
+            return $"{Version} {Name}";
         }
     }
 

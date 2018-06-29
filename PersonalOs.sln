@@ -13,6 +13,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Menu", "Menu\Menu.csproj", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DesktopEnviroment", "DesktopEnviroment\DesktopEnviroment.csproj", "{82A63599-B30F-4C59-9964-765686F2854F}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MPFS_FS", "MPFS_FS\MPFS_FS.csproj", "{9ABC8055-E123-4303-87A8-2AC873C2DF8B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +41,10 @@ Global
 		{82A63599-B30F-4C59-9964-765686F2854F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{82A63599-B30F-4C59-9964-765686F2854F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{82A63599-B30F-4C59-9964-765686F2854F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9ABC8055-E123-4303-87A8-2AC873C2DF8B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9ABC8055-E123-4303-87A8-2AC873C2DF8B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9ABC8055-E123-4303-87A8-2AC873C2DF8B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9ABC8055-E123-4303-87A8-2AC873C2DF8B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

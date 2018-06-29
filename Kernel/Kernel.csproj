@@ -43,12 +43,27 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Kernel.cs" />
+    <Compile Include="Kernel.Root.cs" />
     <Compile Include="Modules.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TestKernel.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\BootLoader\BootLoader.csproj">
+      <Project>{acaca3e9-91b2-4802-8cfb-385f142b0567}</Project>
+      <Name>BootLoader</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Menu\Menu.csproj">
+      <Project>{23899aca-af70-4b8b-8fbb-1d04541a3946}</Project>
+      <Name>Menu</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MPFS_FS\MPFS_FS.csproj">
+      <Project>{9abc8055-e123-4303-87a8-2ac873c2df8b}</Project>
+      <Name>MPFS_FS</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

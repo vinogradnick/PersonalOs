@@ -78,5 +78,11 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\PersonalOs\PersonalOs.csproj">
+      <Project>{f10ca5e7-d808-46b1-a003-2e3bf3b45e6f}</Project>
+      <Name>PersonalOs</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -8,8 +8,11 @@ namespace PersonalOs
     class Program
     {
         static void Main(string[] args)
-        {
+{
+            Console.ReadKey();
+
             OperationSystem system = new OperationSystem();
+            Console.ReadLine();
         }
     }
 }

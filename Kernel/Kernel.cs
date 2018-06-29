@@ -3,13 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+using Menu;
 namespace Kernel
 {
     /// <summary>
     /// Класс ядра операционной системы
     /// </summary>
-    public class Kernel
+    public partial class Kernel
     {
         
         /// <summary>
@@ -28,14 +28,10 @@ namespace Kernel
         /// Загрузка ядра
         /// </summary>
         private static int WorkLoad { get; set; }
-
-        #region OtherSystemFiles
-
-        MPFS_FS.MPFS_FS FILE_SYSTEM;//Файловая система;
-
-        #endregion;
-
-
+        /// <summary>
+        /// Статус загрузки ядра
+        /// </summary>
+        public bool KernelStatus { get; private set; }
         /// <summary>
         /// Конструктор ядра 
         /// </summary>
@@ -50,11 +46,8 @@ namespace Kernel
         {
             /* Создание списка модулей 1/4 размера оперативной памяти */
             ListOfModules = new Stack<Module>((int)ram_size/4);//Создание списка модулей
-
-            FILE_SYSTEM = new MPFS_FS.MPFS_FS(status_load);
-
+            KernelStatus = true;
         }
-       
         /// <summary>
         /// Переопределение метода toString
         /// </summary>

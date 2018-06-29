@@ -58,6 +58,14 @@
       <Project>{aa7c6915-597d-4356-b8fb-23d972dc5d82}</Project>
       <Name>Kernel</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Menu\Menu.csproj">
+      <Project>{23899aca-af70-4b8b-8fbb-1d04541a3946}</Project>
+      <Name>Menu</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MPFS_FS\MPFS_FS.csproj">
+      <Project>{9abc8055-e123-4303-87a8-2ac873c2df8b}</Project>
+      <Name>MPFS_FS</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

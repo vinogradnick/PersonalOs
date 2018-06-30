@@ -10,6 +10,10 @@ namespace MPFS_FS
     public class MPFS_FS
     {
         /// <summary>
+        /// Текущая директория
+        /// </summary>
+        public string _DIR;
+        /// <summary>
         /// Корневая директория системы
         /// </summary>
         DirectoryInfo RootDirectory;
@@ -47,12 +51,12 @@ namespace MPFS_FS
             try
             {
                 Directory.GetDirectories("OS");
-                return false;
+                return true;
 
             }
             catch (Exception)
             {
-                return true;//Система не была создана
+                return false;//Система не была создана
             }
 
 
@@ -62,6 +66,8 @@ namespace MPFS_FS
         /// </summary>
         private void Create_OS_Directory()
         {
+            Directory.CreateDirectory($@"OS");//Модули системы
+
             Directory.CreateDirectory($@"{RootDirectory.Name}\Modules");//Модули системы
             Directory.CreateDirectory($@"{RootDirectory.Name}\System");//Системная папка
             Directory.CreateDirectory($@"{RootDirectory.Name}\Journal");//Системный журнал
@@ -96,7 +102,7 @@ namespace MPFS_FS
                 StreamWriter writer = new StreamWriter(path);
                 foreach (string item in info)
                 {
-                    writer.WriteLine(item);
+                    writer.WriteLineAsync(item);
 
                 }
                 writer.Close();
@@ -107,6 +113,20 @@ namespace MPFS_FS
                 throw;
             }
         }
+        public string[] Move(string directoryName)
+        {
+            try
+            {
+                return Directory.GetFileSystemEntries($@"{RootDirectory.FullName}\{directoryName}");
+
+            }
+            catch (Exception)
+            {
+                return new string[] { "Ошибка" };
+            }
+        }
+
+        public string[] GetRootDirectory() => Directory.GetFileSystemEntries(RootDirectory.FullName);
 
     }
 }

@@ -12,15 +12,53 @@ namespace Menu
 
     public class Menu
     {
+        /// <summary>
+        /// Имя пользователя
+        /// </summary>
+        public static string UserName;
+        /// <summary>
+        /// Доступ к системе
+        /// </summary>
+        public static string Access {
+            get
+            {
+                if (isRoot) return "#"; else return "$";
+            }
+        }
+        /// <summary>
+        /// Полный доступ?
+        /// </summary>
+        public static bool isRoot;
+        /// <summary>
+        /// Список команд
+        /// </summary>
         private Dictionary<string,Action> CommandList = new Dictionary<string,Action>();
-        public delegate void Method(string info);
+        /// <summary>
+        /// Конструктор с параметрами
+        /// </summary>
+        /// <param name="username">Имя пользователя</param>
+        /// <param name="access">Уровень доступа</param>
+        public Menu(string username,bool rootAccess)
+        {
+            UserName = username;
+            isRoot = rootAccess;
+        }
+        #region SystemMethods
+        /// <summary>
+        /// Сообщение об ошибке
+        /// </summary>
+        /// <param name="message">входящее сообщение</param>
         static void ErrorMessage(string message)
         {
             Console.ForegroundColor = ConsoleColor.Red;
             Console.WriteLine(message);
             Console.ForegroundColor = ConsoleColor.White;
         }
-      public static void LoadModule(string module_name)
+        /// <summary>
+        /// Загрузка модуля
+        /// </summary>
+        /// <param name="module_name">наименование модуля</param>
+        public static void LoadModule(string module_name)
         {
             for (int i = 0; i < Console.WindowWidth; i++)
             {
@@ -28,15 +66,22 @@ namespace Menu
             }
             Console.WriteLine($"Модуль {module_name} был загружен {DateTime.Now}");
         }
+        /// <summary>
+        /// Печать информации
+        /// </summary>
+        /// <param name="message"></param>
         public static void PrintInfo(string message)
         {
             Console.WriteLine();
             Console.WriteLine(message);
             Console.WriteLine();
         }
-       
+       /// <summary>
+       /// Вступление для меню
+       /// </summary>
         public static void Welcome()
         {
+            int speed = 30;
             String[] welcome = new string[13]
             {
                 "░░░░░▄▀▀▀▄░░░░░░░░ ",
@@ -66,16 +111,17 @@ namespace Menu
                 foreach (string mes in welcome)
                 {
                     Console.WriteLine(mes);
-                    Thread.Sleep(50);
+                    Thread.Sleep(speed);
                 }
                 Console.WriteLine(welcome1[i]);
-                Thread.Sleep(1000);
+                Thread.Sleep(speed);
                 Console.Clear();
             }
             foreach (string mes in welcome)
             {
                 Console.WriteLine(mes);
-                Thread.Sleep(100);
+                Thread.Sleep(speed);
+                Console.Beep();
             }
             Console.WriteLine("Гусь-Работяга.OS");
             Console.WriteLine();
@@ -83,36 +129,25 @@ namespace Menu
 
         
 
-        public static void PrintParts(ArrayList parts)
+        public  void PrintParts(ArrayList parts)
         {
             foreach (var part in parts)
             {
-                PrintInfo(part.ToString());
+                LoadModule(part.ToString());
             }
         }
-        public static void Choise(List<Method> methods)
-        {
-            switch (Console.ReadLine())
-            {
-                case "1":
-                    
-                    break;
-                case "2":
-                    break;
-                case "3":
-                    break;
-                case "4":
-                    break;
-                default:
-                    ErrorMessage("Выбран неверный элемент");
-                    Choise(methods);
-                    break;
-            }
-        }
+        
         public void AddCommand(string command_name, Action function)
         {
-
-            CommandList.Add(SystemInput(), function);
+            try
+            {
+                CommandList.Add(command_name, function);
+            }
+            catch (Exception e)
+            {
+                ErrorMessage(e.Message);
+            }
+            
         }
         public  void CommandListPrint()
         {
@@ -122,10 +157,35 @@ namespace Menu
             }
             Console.WriteLine();
         }
+        /// <summary>
+        /// Системный ввод
+        /// </summary>
+        /// <returns></returns>
         public string SystemInput()
         {
-            Console.Write("$:===>");
+            Console.ForegroundColor = ConsoleColor.Yellow;
+            Console.Write($@"{UserName}\\");
+            Console.ForegroundColor = ConsoleColor.Blue;
+            Console.Write($"{Access}>~");
+            Console.ForegroundColor = ConsoleColor.White;
             return Console.ReadLine();
+        }
+        /// <summary>
+        /// Печать любого списка
+        /// </summary>
+        /// <param name="collection"></param>
+        public void PrintList(ICollection collection)
+        {
+            int index = 0;
+            foreach(var item in collection)
+            {
+                Console.WriteLine($"[{index}] {item}");
+                index++;
+            }
+        }
+        public void PrintDirectorySystem()
+        {
+           
         }
         public void CommandInput()
         {
@@ -145,9 +205,10 @@ namespace Menu
             {
                 ErrorMessage($"Команды {input} нет в системе");
             }
-            
+            this.CommandInput();
             
         }
+        #endregion;
 
     }
 }

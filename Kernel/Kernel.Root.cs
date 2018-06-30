@@ -18,7 +18,7 @@ namespace Kernel
             /// <summary>
             /// Имя Root пользователя
             /// </summary>
-            static string Name;
+            public  string Name;
             /// <summary>
             /// Пароль рут пользователя
             /// </summary>
@@ -33,7 +33,7 @@ namespace Kernel
             {
 
                 List<string> list = new List<string>() { Name, Password };
-                write("root.txt",list);
+                write(@"OS\root.txt",list);
             }
             
             
